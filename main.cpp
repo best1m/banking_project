@@ -13,8 +13,8 @@ enum
     EXIT
 };
 
-
-struct Account{
+struct Account
+{
     int id;
     char name[20];
     int balance;
@@ -25,6 +25,9 @@ int accNum = 0;
 
 void showMenu();
 void createAccount();
+void deposit();
+void withdraw();
+void showAllAccount();
 
 int main()
 {
@@ -40,13 +43,13 @@ int main()
             createAccount();
             break;
         case DEPOSIT:
-            cout << "hello 2" << endl;
+            deposit();
             break;
         case WITHDRAW:
-            cout << "hello 3" << endl;
+            withdraw();
             break;
         case SHOWALL_ACCOUNT:
-            cout << "hello 4" << endl;
+            showAllAccount();
             break;
         case EXIT:
             return 0;
@@ -85,9 +88,78 @@ void createAccount()
     strcpy(accArr[accNum].name, name);
     accArr[accNum].balance = balance;
 
-    cout << "created account is : " << accArr << endl;
+    cout << "created account is : " << accArr[0].id << endl;
 
     accNum++;
+}
 
+void deposit()
+{
 
+    int id;
+    int money;
+
+    cout << "ID : ";
+    cin >> id;
+
+    for (int i = 0; i < accNum; i++)
+    {
+        if (accArr[i].id == id)
+        {
+            cout << "how much do u wanna get balance?";
+            cin >> money;
+            cout << "balance is : " << money << endl;
+            accArr[i].balance += money;
+        }
+        else
+        {
+            cout << "wrong id" << endl;
+        }
+    }
+
+    cout << "deposit completed" << endl;
+}
+
+void withdraw()
+{
+    int id;
+    int money;
+
+    cout << "ID : ";
+    cin >> id;
+
+    for (int i = 0; i < accNum; i++)
+    {
+        if (accArr[i].id == id)
+        {
+            cout << "how much do u wanna send to balance?";
+            cin >> money;
+            cout << "balance is : " << money << endl;
+
+            if (accArr[i].balance > money)
+            {
+                accArr[i].balance -= money;
+            }
+            else
+            {
+                cout << "not enough money" << endl;
+            }
+        }
+        else
+        {
+            cout << "wrong id" << endl;
+        }
+    }
+
+    cout << "withraw completed" << endl;
+}
+
+void showAllAccount()
+{
+    for (int i = 0; i < accNum; i++)
+    {
+        cout << "ID : " << accArr[i].id << endl;
+        cout << "name : " << accArr[i].name << endl;
+        cout << "balance : " << accArr[i].balance << endl;
+    }
 }
