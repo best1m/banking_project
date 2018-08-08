@@ -13,6 +13,7 @@ enum
     EXIT
 };
 
+
 struct Account{
     int id;
     char name[20];
